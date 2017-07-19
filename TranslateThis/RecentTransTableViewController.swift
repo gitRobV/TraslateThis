@@ -82,7 +82,12 @@ class RecentTransTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "phraseCell", for: indexPath)
-        cell.textLabel?.text = phrases[indexPath.row]["phrase"] as? String
+        
+        let indexOffset = phrases.count - 1
+        
+        let newIndex = indexOffset - indexPath.row
+        
+        cell.textLabel?.text = phrases[newIndex]["phrase"] as? String
     
         return cell
     }

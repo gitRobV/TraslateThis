@@ -14,15 +14,19 @@ class LogInViewController: UITableViewController {
     
     let synthesizer = AVSpeechSynthesizer()
 
+    @IBOutlet weak var userNameLabel: UILabel!
+    
     @IBOutlet weak var userNameInput: UITextField!
     
     @IBAction func translateThis(_ sender: UIButton) {
         
         let username = userNameInput.text
         
-        
-        
-        performSegue(withIdentifier: "LoginSegue", sender: username)
+        if username == "" {
+            userNameLabel.text = "Please enter a Valid Username"
+        } else {
+            performSegue(withIdentifier: "LoginSegue", sender: username)
+        }
     }
     
     

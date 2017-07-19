@@ -34,9 +34,25 @@ class TransThisViewController: UITableViewController, UIPickerViewDataSource, UI
         if let toBeTranaslated = phraseInput.text {
             
             let newToBeTranslated = toBeTranaslated.replacingOccurrences(of: " ", with: "+")
-            let languaged = "es"
+            var languaged = "es"
+            
+            
+            print(pickerView.selectedRow(inComponent: 0))
+            if pickerView.selectedRow(inComponent: 0) == 0{
+                languaged = "es"
+            } else if pickerView.selectedRow(inComponent: 0) == 1 {
+                languaged = "ko"
+            } else if pickerView.selectedRow(inComponent: 0) == 2 {
+                languaged = "pt"
+            } else if pickerView.selectedRow(inComponent: 0) == 3 {
+                languaged = "en"
+            }
+            
+            
             print(newToBeTranslated)
             let url = URL(string: "https://translation.googleapis.com/language/translate/v2?key=AIzaSyCxfmolIMWqxSLSJZXvBCkT1gmNKrbDRvQ&q=" + newToBeTranslated + "&target=" + languaged)
+            
+            
             // create a URLSession to handle the request tasks
             let session = URLSession.shared
             
@@ -123,6 +139,9 @@ class TransThisViewController: UITableViewController, UIPickerViewDataSource, UI
                                 if let requestResults = try JSONSerialization.jsonObject(with: data!, options: JSONSerialization.ReadingOptions.mutableContainers) as? NSArray {
                                     print(requestResults)
                                 }
+                                
+                                
+                                
                             } catch {
                                 print(error)
                             }
@@ -182,26 +201,8 @@ class TransThisViewController: UITableViewController, UIPickerViewDataSource, UI
         })
         
         
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-
+        self.phraseInput.text = nil
+        self.resultsLabel.text = "Saved"
         
         
         
@@ -254,7 +255,31 @@ class TransThisViewController: UITableViewController, UIPickerViewDataSource, UI
         
     }
     
-    var languages = ["Red", "White", "Blue"]
+    func newSpeak(string: String, languaged: String) {
+        var lang = "es-ES"
+        if languaged == "Spanish" {
+            lang = "es-ES"
+        }
+        else if languaged == "Korean" {
+            lang = "ko-KR"
+        }
+        else if languaged == "Portuguese" {
+            lang = "pt-PT"
+        }
+        else if languaged == "English" {
+            lang = "en-US"
+        }
+        
+        
+        
+        let rawText = string
+        let utterance = AVSpeechUtterance(string: rawText)
+        utterance.voice = AVSpeechSynthesisVoice(language: lang)
+        self.synthesizer.speak(utterance)
+        
+    }
+    
+    var languages = ["Spanish", "Korean", "Portuguese", "English"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
