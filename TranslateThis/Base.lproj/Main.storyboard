@@ -325,11 +325,31 @@
                     <connections>
                         <segue destination="eCK-jf-FYw" kind="relationship" relationship="viewControllers" id="iR4-jb-Y51"/>
                         <segue destination="iB8-14-fdK" kind="relationship" relationship="viewControllers" id="1Hh-ED-HwA"/>
+                        <segue destination="WUa-Up-h9z" kind="relationship" relationship="viewControllers" id="V6G-gv-dHv"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JIs-ud-xe1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-305" y="-1434"/>
+        </scene>
+        <!--My Translations-->
+        <scene sceneID="iY3-ck-rRH">
+            <objects>
+                <viewController title="My Translations" id="WUa-Up-h9z" customClass="MyTranslationsVC" customModule="TranslateThis" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="aIl-Lt-OTH"/>
+                        <viewControllerLayoutGuide type="bottom" id="q5R-lG-vTa"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="aeS-If-GFm">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" systemItem="favorites" id="aAb-jp-ou2"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="GJo-zC-xHx" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="524" y="-1436"/>
         </scene>
     </scenes>
 </document>
