@@ -34,22 +34,27 @@ class TransThisViewController: UITableViewController, UIPickerViewDataSource, UI
         if let toBeTranaslated = phraseInput.text {
             
             let newToBeTranslated = toBeTranaslated.replacingOccurrences(of: " ", with: "+")
-            var languaged = "es"
+            var languaged = String ()
+            var voice = String ()
             
             
             print(pickerView.selectedRow(inComponent: 0))
             if pickerView.selectedRow(inComponent: 0) == 0{
                 languaged = "es"
+                voice = "es-ES"
             } else if pickerView.selectedRow(inComponent: 0) == 1 {
                 languaged = "ko"
+                voice = "ko-KR"
             } else if pickerView.selectedRow(inComponent: 0) == 2 {
                 languaged = "pt"
+                voice = "pt-BR"
             } else if pickerView.selectedRow(inComponent: 0) == 3 {
                 languaged = "en"
+                voice = "en-US"
             }
             
+            print("what is this: \(languaged)")
             
-            print(newToBeTranslated)
             let url = URL(string: "https://translation.googleapis.com/language/translate/v2?key=AIzaSyCxfmolIMWqxSLSJZXvBCkT1gmNKrbDRvQ&q=" + newToBeTranslated + "&target=" + languaged)
             
             
@@ -77,7 +82,7 @@ class TransThisViewController: UITableViewController, UIPickerViewDataSource, UI
 
                         DispatchQueue.main.async {
                             self.resultsLabel.text = self.translatedText
-                        self.speak(string: self.translatedText!)
+                            self.newSpeak(string: self.translatedText!, languaged: voice)
                         }
                         
                     }
@@ -89,13 +94,13 @@ class TransThisViewController: UITableViewController, UIPickerViewDataSource, UI
             // execute the task and then wait for the response
             // to run the completion handler. This is async!
             task.resume()
-            
+            DispatchQueue.main.async {
+                self.newSpeak(string: process, languaged: voice)
+            }
         } else {
             print("Please write a valid word")
         }
-        DispatchQueue.main.async {
-            self.speak(string: process)
-        }
+        
     }
     @IBAction func saveButtonPressed(_ sender: UIButton) {
     
@@ -256,33 +261,42 @@ class TransThisViewController: UITableViewController, UIPickerViewDataSource, UI
     }
     
     func newSpeak(string: String, languaged: String) {
-        var lang = "es-ES"
-        if languaged == "Spanish" {
-            lang = "es-ES"
-        }
-        else if languaged == "Korean" {
-            lang = "ko-KR"
-        }
-        else if languaged == "Portuguese" {
-            lang = "pt-PT"
-        }
-        else if languaged == "English" {
-            lang = "en-US"
-        }
         
-        
+        var voiceToUse: AVSpeechSynthesisVoice?
+        for voice in AVSpeechSynthesisVoice.speechVoices() {
+            if #available(iOS 9.0, *) {
+                if voice.language == languaged {
+                    voiceToUse = voice
+                    print("Found Voice to use: \(voice)")
+                }
+            } 
+        }
         
         let rawText = string
         let utterance = AVSpeechUtterance(string: rawText)
-        utterance.voice = AVSpeechSynthesisVoice(language: lang)
+        utterance.voice = voiceToUse
         self.synthesizer.speak(utterance)
         
     }
     
     var languages = ["Spanish", "Korean", "Portuguese", "English"]
     
+    
+    func dismissKeyboard() {
+        view.endEditing(true)
+    }
+    
+    func hideKeyboardWhenTappedAround() {
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.dismissKeyboard))
+        tap.cancelsTouchesInView = false
+        view.addGestureRecognizer(tap)
+    }
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        hideKeyboardWhenTappedAround()
         
         if let user = username {
             let greeting = "\(String(describing: user)), What would you like to translate"

@@ -30,6 +30,15 @@ class LogInViewController: UITableViewController {
     }
     
     
+    func dismissKeyboard() {
+        view.endEditing(true)
+    }
+    
+    func hideKeyboardWhenTappedAround() {
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.dismissKeyboard))
+        tap.cancelsTouchesInView = false
+        view.addGestureRecognizer(tap)
+    }
     
     
     
@@ -51,6 +60,9 @@ class LogInViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        hideKeyboardWhenTappedAround()
+        
         
         let greeting = "Greetings! Please provide a Username below."
         self.speak(string: greeting)

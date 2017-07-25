@@ -93,7 +93,11 @@ class RecentTransTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        self.speak(string: phrases[indexPath.row]["translation"] as! String)
+        
+        let indexOffset = phrases.count - 1
+        
+        let newIndex = indexOffset - indexPath.row
+        self.speak(string: phrases[newIndex]["translation"] as! String)
         
     }
     
