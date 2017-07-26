@@ -312,6 +312,70 @@
             </objects>
             <point key="canvasLocation" x="-306" y="-686"/>
         </scene>
+        <!--Voice Translations-->
+        <scene sceneID="4NY-Pl-UG3">
+            <objects>
+                <viewController id="2ny-6a-PRX" customClass="TransThisVoiceVC" customModule="TranslateThis" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="iJZ-LI-luW"/>
+                        <viewControllerLayoutGuide type="bottom" id="ONc-uE-U3C"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="BAm-RZ-XpP">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="resulsLabel" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FGu-pJ-RaG">
+                                <rect key="frame" x="16" y="56" width="343" height="43"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="passedIn" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zUI-ZV-Iir">
+                                <rect key="frame" x="16" y="128" width="333" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="nE9-fO-Ggo">
+                                <rect key="frame" x="16" y="190" width="333" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="P3m-OJ-mgz">
+                                <rect key="frame" x="33" y="304" width="91" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="recordButton"/>
+                                <connections>
+                                    <action selector="recordButtonPressed:" destination="2ny-6a-PRX" eventType="touchUpInside" id="ZSp-Br-8WZ"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="R5E-uT-27J">
+                                <rect key="frame" x="226" y="304" width="88" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="translateThis"/>
+                                <connections>
+                                    <action selector="translateThis:" destination="2ny-6a-PRX" eventType="touchUpInside" id="JVe-4p-TWm"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Voice Translations" image="oneMic" selectedImage="oneMic" id="ePM-k1-zNI"/>
+                    <connections>
+                        <outlet property="passedIn" destination="zUI-ZV-Iir" id="ls8-My-ej6"/>
+                        <outlet property="recordButton" destination="P3m-OJ-mgz" id="rZE-oM-krj"/>
+                        <outlet property="resulsLabel" destination="FGu-pJ-RaG" id="K6m-yy-Oxp"/>
+                        <outlet property="thePhrase" destination="nE9-fO-Ggo" id="HEs-NG-1E8"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="bIu-n7-sdb" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="524" y="-687.7061469265368"/>
+        </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="R9n-Bs-lLF">
             <objects>
@@ -326,6 +390,7 @@
                         <segue destination="eCK-jf-FYw" kind="relationship" relationship="viewControllers" id="iR4-jb-Y51"/>
                         <segue destination="iB8-14-fdK" kind="relationship" relationship="viewControllers" id="1Hh-ED-HwA"/>
                         <segue destination="WUa-Up-h9z" kind="relationship" relationship="viewControllers" id="V6G-gv-dHv"/>
+                        <segue destination="2ny-6a-PRX" kind="relationship" relationship="viewControllers" id="oKs-Fy-sCO"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JIs-ud-xe1" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -352,4 +417,7 @@
             <point key="canvasLocation" x="524" y="-1436"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="oneMic" width="20" height="30"/>
+    </resources>
 </document>
